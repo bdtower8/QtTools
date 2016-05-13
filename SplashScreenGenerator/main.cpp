@@ -15,8 +15,15 @@ int main(int argc, char *argv[])
     QString sImageFilename = a.arguments().at(1);
 
     QMap<QString, QSize> mapImageSizes;
-    mapImageSizes.insert("small.png", QSize(480, 640));
-    mapImageSizes.insert("large.png", QSize(1080, 1920));
+    mapImageSizes.insert("LaunchImage-iOS7-568h@2x.png", QSize(640, 1136));
+    mapImageSizes.insert("LaunchImage-iOS7-Portrait.png", QSize(768, 1024));
+    mapImageSizes.insert("LaunchImage-iOS7-Portrait@2x.png", QSize(1536, 2048));
+    mapImageSizes.insert("LaunchImage-iOS7@2x.png", QSize(640, 960));
+    mapImageSizes.insert("LaunchImage.png", QSize(320, 480));
+    mapImageSizes.insert("LaunchImage@2x.png", QSize(640, 960));
+    mapImageSizes.insert("LaunchImage-568h@2x.png", QSize(640, 1136));
+    mapImageSizes.insert("LaunchImage-Portrait.png", QSize(768, 1004));
+    mapImageSizes.insert("LaunchImage-Portrait@2x.png", QSize(1536, 2008));
 
     if(QFile::exists(sImageFilename)) {
         // open the input image
