@@ -18,6 +18,9 @@ int main(int argc, char *argv[])
     mapImageSizes.insert("Default.png", QSize(320, 480));
     mapImageSizes.insert("Default@2x.png", QSize(640, 960));
     mapImageSizes.insert("Default@3x.png", QSize(1242, 2208));
+    mapImageSizes.insert("Default-568h.png", QSize(320, 568));
+    mapImageSizes.insert("Default-667h.png", QSize(375, 667));
+    mapImageSizes.insert("Default-736h.png", QSize(414, 736));
     mapImageSizes.insert("Default-568h@2x.png", QSize(640, 1136));
     mapImageSizes.insert("Default-667h@2x.png", QSize(750, 1334));
     mapImageSizes.insert("Default-736h@3x.png", QSize(1242, 2208));
