@@ -15,17 +15,25 @@ int main(int argc, char *argv[])
     QString sImageFilename = a.arguments().at(1);
 
     QMap<QString, QSize> mapImageSizes;
-    mapImageSizes.insert("Default-iOS7-568h@2x.png", QSize(640, 1136));
-    mapImageSizes.insert("Default-iOS7-Portrait.png", QSize(768, 1024));
-    mapImageSizes.insert("Default-iOS7-Portrait@2x.png", QSize(1536, 2048));
-    mapImageSizes.insert("Default-iOS7@2x.png", QSize(640, 960));
     mapImageSizes.insert("Default.png", QSize(320, 480));
     mapImageSizes.insert("Default@2x.png", QSize(640, 960));
+    mapImageSizes.insert("Default@3x.png", QSize(1242, 2208));
     mapImageSizes.insert("Default-568h@2x.png", QSize(640, 1136));
-    mapImageSizes.insert("Default-Portrait.png", QSize(768, 1004));
-    mapImageSizes.insert("Default-375w-667h@2x~iphone.png", QSize(750, 1334));
-    mapImageSizes.insert("Default-414w-736h@3x~iphone.png", QSize(1242, 2208));
-    mapImageSizes.insert("Default-Portrait@2x.png", QSize(1536, 2008));
+    mapImageSizes.insert("Default-667h@2x.png", QSize(750, 1334));
+    mapImageSizes.insert("Default-736h@3x.png", QSize(1242, 2208));
+    mapImageSizes.insert("Default-Portrait.png", QSize(768, 1024));
+    mapImageSizes.insert("Default-Portrait@2x.png", QSize(1536, 2048));
+    mapImageSizes.insert("Default-Portrait@3x.png", QSize(2304, 3072));
+
+    QFile textFile("info.plist");
+    QTextStream textStream(&textFile);
+
+    if(!textFile.open(QFile::WriteOnly | QFile::Truncate)) {
+        qDebug() << "Failed to open info.plist for writing";
+        return -1;
+    }
+
+    textStream << "<key>UILaunchImages</key>\n<array>\n";
 
     if(QFile::exists(sImageFilename)) {
         // open the input image
@@ -50,7 +58,16 @@ int main(int argc, char *argv[])
 
             qDebug() << "Saved " + key + " (" + QString::number(mapImageSizes[key].width()) +
                         " x " + QString::number(mapImageSizes[key].height()) + ")";
+
+            // add the entry to info.plist
+            textStream << "\t<dict>\n\t\t<key>UILaunchImageMinimumOSVersion</key>\n\t\t<string>7.0</string>\n\t\t<key>UILaunchImageName</key>\n\t\t<string>" +
+                          key.mid(0, key.size() - 4) + "</string>\n\t\t<key>UILaunchImageOrientation</key>\n\t\t<string>Portrait</string>\n\t\t" +
+                          "<key>UILaunchImageSize</key>\n\t\t<string>{" + QString::number(mapImageSizes[key].width()) + ", " +
+                          QString::number(mapImageSizes[key].height()) + "}</string>\n\t</dict>\n";
         }
+
+        textStream << "</array>";
+        textFile.close();
 
     } else {
         qDebug() << "Image file doesn't exist - " + sImageFilename;
