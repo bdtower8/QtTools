@@ -4,6 +4,9 @@
 #include <QMap>
 #include <QDebug>
 
+//#define ICON
+#define LAUNCHER
+
 int main(int argc, char *argv[])
 {
     if(argc != 2) {
@@ -13,8 +16,31 @@ int main(int argc, char *argv[])
 
     QCoreApplication a(argc, argv);
     QString sImageFilename = a.arguments().at(1);
+    QString sImageFilenameTrimmed = sImageFilename.mid(0, sImageFilename.lastIndexOf("."));
 
     QMap<QString, QSize> mapImageSizes;
+
+#ifdef ICON
+    mapImageSizes.insert(sImageFilenameTrimmed + "29x29.png", QSize(29, 29));
+    mapImageSizes.insert(sImageFilenameTrimmed + "29x29@2x.png", QSize(58, 58));
+    mapImageSizes.insert(sImageFilenameTrimmed + "29x29@2x~ipad.png", QSize(58, 58));
+    mapImageSizes.insert(sImageFilenameTrimmed + "29x29~ipad.png", QSize(29, 29));
+    mapImageSizes.insert(sImageFilenameTrimmed + "40x40@2x.png", QSize(80, 80));
+    mapImageSizes.insert(sImageFilenameTrimmed + "40x40@2x~ipad.png", QSize(80, 80));
+    mapImageSizes.insert(sImageFilenameTrimmed + "40x40~ipad.png", QSize(40, 40));
+    mapImageSizes.insert(sImageFilenameTrimmed + "50x50@2x~ipad.png", QSize(100, 100));
+    mapImageSizes.insert(sImageFilenameTrimmed + "50x50~ipad.png", QSize(50, 50));
+    mapImageSizes.insert(sImageFilenameTrimmed + "57x57.png", QSize(57, 57));
+    mapImageSizes.insert(sImageFilenameTrimmed + "57x57@2x.png", QSize(114, 114));
+    mapImageSizes.insert(sImageFilenameTrimmed + "60x60@2x.png", QSize(120, 120));
+    mapImageSizes.insert(sImageFilenameTrimmed + "72x72@2x~ipad.png", QSize(144, 144));
+    mapImageSizes.insert(sImageFilenameTrimmed + "72x72~ipad.png", QSize(72, 72));
+    mapImageSizes.insert(sImageFilenameTrimmed + "76x76@2x~ipad.png", QSize(152, 152));
+    mapImageSizes.insert(sImageFilenameTrimmed + "76x76~ipad.png", QSize(76, 76));
+    mapImageSizes.insert(sImageFilenameTrimmed + "167x167.png", QSize(167, 167));
+#endif
+
+#ifdef LAUNCHER
     mapImageSizes.insert("Default.png", QSize(320, 480));
     mapImageSizes.insert("Default@2x.png", QSize(640, 960));
     mapImageSizes.insert("Default@3x.png", QSize(1242, 2208));
