@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
     mapImageSizes.insert("Default-Portrait.png", QSize(768, 1024));
     mapImageSizes.insert("Default-Portrait@2x.png", QSize(1536, 2048));
     mapImageSizes.insert("Default-Portrait@3x.png", QSize(2304, 3072));
+    mapImageSizes.insert("Android.png", QSize(1440, 2560));
 
     QFile textFile("info.plist");
     QTextStream textStream(&textFile);
